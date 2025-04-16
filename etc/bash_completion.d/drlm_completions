@@ -1115,8 +1115,8 @@ __drlm_sched ()
 
 __drlm_scan ()
 {
-  local options_s="-I -h"
-  local options_l="--id --help"
+  local options_s="-I -h -M"
+  local options_l="--id --help --mode"
 
   if __drlm_exist_option "-h --help" "$workflow"; then
     local options_s="-h"
@@ -1133,6 +1133,9 @@ __drlm_scan ()
       for result in $query; do
         COMPREPLY[i++]="$result"
       done
+      ;;
+    -M | --mode)
+      COMPREPLY=( $(compgen -W "oval clamav" -- "$cur") )
       ;;
     "-"*)
       COMPREPLY=()
